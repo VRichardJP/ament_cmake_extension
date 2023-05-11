@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format2.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="2">
+  <name>ament_cmake_extension</name>
+  <version>0.1.0</version>
+  <description>A collection of functions to ease the use of the ament build system in CMake.</description>
+  <license>Apache License 2.0</license>
+
+  <author email="richard-v@macnica.co.jp">Vincent Richard</author>
+  <maintainer email="richard-v@macnica.co.jp">Vincent Richard</maintainer>
+
+  <buildtool_depend>ament_cmake</buildtool_depend>
+  <buildtool_depend>ament_cmake_gtest</buildtool_depend>
+  <buildtool_export_depend>ament_cmake</buildtool_export_depend>
+  <buildtool_export_depend>ament_cmake_gtest</buildtool_export_depend>
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>
