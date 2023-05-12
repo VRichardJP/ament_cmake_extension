@@ -38,11 +38,6 @@ macro(ament_ex_package)
   if(NOT "${${PROJECT_NAME}_TARGETS}" STREQUAL "")
     # export all targets for downstream packages
     ament_export_targets(${PROJECT_NAME}Targets)
-
-    # don't forget to install "include" directory
-    if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/include")
-      install(DIRECTORY include/ DESTINATION include)
-    endif()
   endif()
 
   ament_package(${_ament_package_args})

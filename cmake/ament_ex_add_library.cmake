@@ -16,11 +16,9 @@ macro(ament_ex_add_library target)
     set(_keyword PUBLIC)
   endif()
   
-  # add "include" directory, if any
+  # add and install "./include" directory, if any
   if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/include")
-    target_include_directories(${target} ${_keyword} 
-      $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
-      $<INSTALL_INTERFACE:include>)
+    ament_ex_target_include_directories(${target} include)
   endif()
 
   # include/link all package dependencies

@@ -3,7 +3,8 @@
 #
 # :param ARGN: targets that will be installed and exported
 # :type ARGN: list of strings
-# :param NO_EXPORT: targets that will not be exported to downstream packages (e.g. executable)
+# :param NO_EXPORT: targets that will be installed but not be exported to 
+#                   downstream packages (e.g. executable)
 # :type NO_EXPORT: list of strings
 #
 # @public

@@ -139,16 +139,11 @@ A. If the included directory does not need to be passed downstream, use PRIVATE 
 target_include_directories(myTarget PRIVATE lib/include)
 ```
 
-B. If the include directory must be available in downstream packages, you can use the lovely CMake generator expression:
+B. If the include directory must be available in downstream packages, you can do:
 
 ```cmake
-# Make sure downstream packages can find the installed include directory
-target_include_directories(myTarget PUBLIC
-  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/lib/include>
-  $<INSTALL_INTERFACE:lib/include>)
-
-# Install the files
-install(DIRECTORY lib/include/ DESTINATION lib/include)
+# Correctly include and install directory for downstream packages
+ament_ex_target_include_directories(myTarget lib/include)
 ```
 
 ### Create a test

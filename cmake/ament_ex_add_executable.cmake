@@ -8,7 +8,7 @@ macro(ament_ex_add_executable target)
 
   add_executable(${target} ${ARGN})
 
-  # add "include" directory, if any
+  # add "./include" directory, if any
   if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/include")
     target_include_directories(${target} PRIVATE include)
   endif()
