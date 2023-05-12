@@ -27,6 +27,15 @@ macro(ament_ex_target_add_dependencies target)
     ament_export_dependencies(${deps})
   endif()
 
+  # Let ament_target_dependencies figure out what is the correct way to include
+  # the dependency. Its implementation is quite complex, but basically what it
+  # does is:
+  # A. If the dependency defines modern CMake targets, then simply do:
+  #      target_link_libraries(${target} ${dep}_TARGETS)
+  # B. Otherwise use the classic CMake variables:
+  #      target_compile_definitions(${target} ${${dep}_DEFINITIONS})
+  #      target_include_directories(${target} ${${dep}_INCLUDE_DIRS})
+  #      target_link_libraries(${target} ${${dep}_LIBRARIES})
   ament_target_dependencies(${target} ${ARGN})
 
 endmacro()

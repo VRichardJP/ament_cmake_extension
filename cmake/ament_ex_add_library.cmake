@@ -24,7 +24,7 @@ macro(ament_ex_add_library target)
   endif()
 
   # include/link all package dependencies
-  ament_ex_target_add_package_dependencies(${target})
+  ament_ex_target_add_package_dependencies(${target} BUILD_DEPS)
 
   # install target and export it for downstream packages
   ament_ex_install_targets(${target})

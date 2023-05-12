@@ -14,7 +14,7 @@ macro(ament_ex_add_executable target)
   endif()
 
   # include/link all package dependencies
-  ament_ex_target_add_package_dependencies(${target})
+  ament_ex_target_add_package_dependencies(${target} BUILD_DEPS)
   
   # install the target but don't export it downstream
   ament_ex_install_targets(NO_EXPORT ${target})

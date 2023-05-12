@@ -164,6 +164,9 @@ if(BUILD_TESTING)
   ament_add_gtest(test_myLibrary
     # ...
   )
+  # add all <test_depend> dependencies:
+  ament_ex_target_add_package_dependencies(test_myLibrary TEST_DEPS)
+  # linking the target should work just fine
   target_link_library(test_myLibrary myLibrary)
 endif()
 ```
