@@ -21,7 +21,9 @@ macro(ament_ex_install_targets)
       LIBRARY DESTINATION lib
       RUNTIME DESTINATION bin
     )
-  else()
+  endif()
+  
+  if(_exported_targets)
     install(
       TARGETS ${_exported_targets}
       EXPORT ${PROJECT_NAME}Targets

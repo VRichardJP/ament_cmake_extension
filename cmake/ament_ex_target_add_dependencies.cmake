@@ -14,9 +14,6 @@
 # @public
 #
 macro(ament_ex_target_add_dependencies target)
-  # passed down to ament_target_dependencies()
-  set(_ament_target_dependencies_args ${ARGN})
-
   # extract dependencies
   cmake_parse_arguments(_ARG "INTERFACE;PUBLIC;SYSTEM" "" "" ${ARGN})
   set(_deps ${_ARG_UNPARSED_ARGUMENTS})
