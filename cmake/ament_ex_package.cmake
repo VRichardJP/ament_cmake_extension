@@ -1,5 +1,5 @@
 #
-# Export dependencies and targets and invoke ``ament_package()``.
+# Export package dependencies and targets and invoke ``ament_package()``.
 #
 # :param INSTALL_TO_SHARE: a list of directories to be installed to the
 #   package's share directory
@@ -10,12 +10,17 @@
 # @public
 #
 macro(ament_ex_package)
-  # NOTE: Can't use prefix _ARG because ament_export_targets() below would overwrite 
-  # the variable _ARG_UNPARSED_ARGUMENTS before it is passed down to ament_package()
-  # This would not be a problem if we used functions instead of macros. Unfortunately,
-  # the whole ament cmake framework only works with macros :(
-  cmake_parse_arguments(ARG "" "" "INSTALL_TO_SHARE" ${ARGN})
-  # passing all unparsed arguments to ament_package()
+  cmake_parse_arguments(_ARG "" "" "INSTALL_TO_SHARE" ${ARGN})
+  # NOTE: ament_export_targets() override _ARG_UNPARSED_ARGUMENTS, so we need to save it here
+  set(_ament_package_args ${_ARG_UNPARSED_ARGUMENTS})
+
+  # install directories to share
+  foreach(_dir ${_ARG_INSTALL_TO_SHARE})
+    install(
+      DIRECTORY "${_dir}"
+      DESTINATION "share/${PROJECT_NAME}"
+    )
+  endforeach()
 
   # export all found build dependencies which are also run dependencies
   set(_run_depends
@@ -40,13 +45,5 @@ macro(ament_ex_package)
     endif()
   endif()
 
-  # install directories to share
-  foreach(_dir ${ARG_INSTALL_TO_SHARE})
-    install(
-      DIRECTORY "${_dir}"
-      DESTINATION "share/${PROJECT_NAME}"
-    )
-  endforeach()
-
-  ament_package(${ARG_UNPARSED_ARGUMENTS})
+  ament_package(${_ament_package_args})
 endmacro()

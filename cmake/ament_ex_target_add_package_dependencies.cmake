@@ -1,5 +1,5 @@
 #
-# Add all package dependencies to the target: definitions, includes, libraries, targets.
+# Correctly add all package dependencies definitions, includes, libraries to the target.
 # Optional flags:
 # - TEST: also add test dependencies
 #
@@ -25,17 +25,20 @@ macro(ament_ex_target_add_package_dependencies target)
     unset(_keyword)
   endif()
 
-  # modern cmake, pull automatically all necessary dependencies (include, link...)
-  if(NOT "${${PROJECT_NAME}_FOUND_TARGETS}" STREQUAL "")
-    target_link_libraries(${target} ${_keyword} ${${PROJECT_NAME}_FOUND_TARGETS})
-  endif()
-
-  # let ament_target_dependencies figure out what is the correct include/link required for each build dependency
+  # Let ament_target_dependencies figure out what is the correct way to include 
+  # the dependency. Its implementation is quite complex, but basically what it
+  # does is:
+  # A. If the dependency defines modern CMake targets, then simply do:
+  #      target_link_libraries(${target} ${dep}_TARGETS)
+  # B. Otherwise use the classic CMake variables:
+  #      target_compile_definitions(${target} ${${dep}_DEFINITIONS})
+  #      target_include_directories(${target} ${${dep}_INCLUDE_DIRS})
+  #      target_link_libraries(${target} ${${dep}_LIBRARIES})
   if(NOT "${${PROJECT_NAME}_FOUND_BUILD_DEPENDS}" STREQUAL "")
     ament_target_dependencies(${target} SYSTEM ${_keyword} ${${PROJECT_NAME}_FOUND_BUILD_DEPENDS})
   endif()
 
-  # same for tests
+  # Same for tests
   if(_ARG_TEST AND NOT "${${PROJECT_NAME}_FOUND_TEST_DEPENDS}" STREQUAL "")
     ament_target_dependencies(${target} SYSTEM ${_keyword} ${${PROJECT_NAME}_FOUND_TEST_DEPENDS})
   endif()

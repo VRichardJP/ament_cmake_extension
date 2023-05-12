@@ -2,8 +2,8 @@
 <?xml-model href="http://download.ros.org/schema/package_format2.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
 <package format="2">
   <name>ament_cmake_extension</name>
-  <version>0.1.0</version>
-  <description>A collection of functions to ease the use of the ament build system in CMake.</description>
+  <version>0.2.0</version>
+  <description>A simple abstraction layer to the ament CMake build system.</description>
   <license>Apache License 2.0</license>
 
   <author email="richard-v@macnica.co.jp">Vincent Richard</author>

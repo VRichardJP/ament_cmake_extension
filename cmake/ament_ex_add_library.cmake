@@ -16,14 +16,17 @@ macro(ament_ex_add_library target)
     set(_keyword PUBLIC)
   endif()
   
-  # add "include" directory
-  target_include_directories(${target} ${_keyword} 
-    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
-    $<INSTALL_INTERFACE:include>)
+  # add "include" directory, if any
+  if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/include")
+    target_include_directories(${target} ${_keyword} 
+      $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+      $<INSTALL_INTERFACE:include>)
+  endif()
 
   # include/link all package dependencies
   ament_ex_target_add_package_dependencies(${target})
 
-  ament_ex_install_target(${target})
+  # install target and export it for downstream packages
+  ament_ex_install_targets(${target})
 
 endmacro()
