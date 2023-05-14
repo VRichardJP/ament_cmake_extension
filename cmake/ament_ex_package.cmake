@@ -4,7 +4,7 @@
 # :param INSTALL_TO_SHARE: a list of directories to be installed to the
 #   package's share directory
 # :type INSTALL_TO_SHARE: list of strings
-# :param ARGN: any other arguments are passed through to ament_package()
+# :param ARGN: any other arguments are passed through to ``ament_package()``
 # :type ARGN: list of strings
 #
 # @public

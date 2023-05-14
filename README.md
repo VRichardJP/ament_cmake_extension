@@ -51,7 +51,7 @@ project(myRosPackage)
 find_package(ament_cmake_extension REQUIRED)
 
 # automatically find_package() on all package dependencies
-ament_ex_find_package_dependencies()
+ament_ex_find_all_package_dependencies()
 
 # add your libraries/executable/test here
 # ament_ex_add_library(...)
@@ -87,16 +87,21 @@ ament_ex_add_executable(MyExecutable
 
 ### Add a non-ROS dependency
 
-If the dependency define standard cmake variables: `_TARGETS` or `_LIBRARIES`, `_INCLUDE_DIRS`..., then this should work just fine:
+If the dependency define standard cmake variables, such as `_TARGETS`, `_LIBRARIES` or `_INCLUDE_DIRS`, then use `ament_target_dependencies()`. If the dependency defines targets, you can just use `target_link_libraries()`:
 
 ```cmake
-find_package(PCL REQUIRED COMPONENTS common)
+# find and export the package downstream
+ament_ex_find_package(PCL REQUIRED COMPONENTS common)
+ament_ex_find_package(Eigen3)
 
 # define your target...
 # e.g. ament_ex_add_library(MyTarget ...)
 
-# automatically include/link dependency to target and export the dependency downstream
-ament_ex_target_dependencies(MyTarget SYSTEM PCL)
+# Using modern CMake target
+target_link_libraries(MyTarget Eigen3::Eigen)
+
+# Using old-style CMake variables, automatically add compile definitions, include directories and link libraries from dependency
+ament_target_dependencies(MyTarget SYSTEM PCL)
 ```
 
 ## Advanced usage

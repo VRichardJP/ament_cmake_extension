@@ -1,5 +1,5 @@
 #
-# Invoke find_package() for all build and buildtool dependencies.
+# Invoke ``find_package()`` for all build and buildtool dependencies.
 #
 # All found package names are appended to the
 # ``${PROJECT_NAME}_FOUND_BUILD_DEPENDS`` /
@@ -13,10 +13,10 @@
 #
 # @public
 #
-macro(ament_ex_find_package_dependencies)
+macro(ament_ex_find_all_package_dependencies)
   set(_ARGN "${ARGN}")
   if(_ARGN)
-    message(FATAL_ERROR "ament_ex_find_package_dependencies() called with unused arguments: ${_ARGN}")
+    message(FATAL_ERROR "ament_ex_find_all_package_dependencies() called with unused arguments: ${_ARGN}")
   endif()
 
   if(NOT _AMENT_PACKAGE_NAME)
@@ -39,12 +39,14 @@ macro(ament_ex_find_package_dependencies)
     endif()
   endforeach()
 
-  # try to find_package() all test dependencies
-  foreach(_dep ${${PROJECT_NAME}_TEST_DEPENDS})
-    find_package(${_dep} QUIET)
-    if(${_dep}_FOUND)
-      list(APPEND ${PROJECT_NAME}_FOUND_TEST_DEPENDS ${_dep})
-    endif()
-  endforeach()
+  if(BUILD_TESTING)
+    # try to find_package() all test dependencies
+    foreach(_dep ${${PROJECT_NAME}_TEST_DEPENDS})
+      find_package(${_dep} QUIET)
+      if(${_dep}_FOUND)
+        list(APPEND ${PROJECT_NAME}_FOUND_TEST_DEPENDS ${_dep})
+      endif()
+    endforeach()
+  endif()
 
 endmacro()

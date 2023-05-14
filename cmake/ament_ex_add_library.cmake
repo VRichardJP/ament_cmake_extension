@@ -1,5 +1,5 @@
 #
-# Convenience wrapper over add_library(). Accept the same parameters.
+# Convenience wrapper over ``add_library()``. Accept the same parameters.
 # Automatically include, link package dependencies and install.
 #
 # @public
