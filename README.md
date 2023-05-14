@@ -10,7 +10,7 @@ In CMake (and Ament CMake), building, installing and exporting targets are total
 - including, installing and exporting your include directories.
 - building, installing and exporting your targets.
 
-There are a lot of things to think about and to write. It is easy to miss a few, although it is essentially the same thing over and over. The Ament CMake Extension package solves this issue with the `ament_ex` macros. With the `ament_ex` macros, to build is to install, is to export; to link a dependency is to export it; and so on.
+There are a lot of things to think about and to write. It is easy to miss some, although it is essentially the same thing over and over. The Ament CMake Extension package solves this issue with the `ament_ex` macros. With the `ament_ex` macros, to build is to install, is to export; to fetch and link a dependency is to export it; and so on.
 
 ## Why not `ament_auto`?
 
