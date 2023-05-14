@@ -32,6 +32,12 @@ Don't get me wrong: these macros are great. I just find they are a bit too much.
 
 Although `ament_auto` and `ament_ex` macros have very similar API, their behavior can be quite different. One key difference is that `ament_auto` works with old-style standard CMake variables, such as `_INCLUDE_DIRS`, `_LIBRARIES`, etc, while `ament_ex` macros work exclusively with modern CMake targets. From the user point-of-view it should not really matter, but in practice it is easier to mess up targets, as installing and exporting targets requires some extra care. If you follow the guidelines below, you should do just fine!
 
+But first, a few DON'T:
+
+- Don't use `_LIBRARIES`, `_INCLUDE_DIRS` and other cmake variables yourself.
+- Don't use base ament macros yourself.
+- Don't use the macros outside the root CMake file (this is limitation from `ament_cmake`)
+
 ### package.xml
 
 In your package.xml, add:
@@ -108,11 +114,6 @@ ament_target_dependencies(MyTarget SYSTEM PCL)
 
 The "How to use" section above should be enough for 99% use cases. Down there is a non-exhaustive list "tricky" situations, and how to handle them properly.
 
-But first, a few DON'T:
-
-- Don't use `_LIBRARIES`, `_INCLUDE_DIRS` and other cmake variables yourself.
-- Don't use base ament macros yourself.
-- Don't use the macros outside the root CMake file (this is limitation from `ament_cmake`)
 
 ### Create a header only package
 
